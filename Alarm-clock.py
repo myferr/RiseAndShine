@@ -5,7 +5,7 @@ after X number of minutes/seconds or at a particular time.
 from tkinter import *
 import datetime
 import time
-from playsound import playsound
+import simpleaudio as sa
 
 
 def alarm(set_alarm_timer):
@@ -20,8 +20,11 @@ def alarm(set_alarm_timer):
             print("Time to Wake up")
 
             play = 0
+            wave_obj = sa.WaveObject.from_wave_file("sound.wav")
             while play != 10:  # This will ring alarm for 10 seconds
-                playsound("sound.wav")
+                play_obj = wave_obj.play()
+                play_obj.wait_done()
+                play += 1
                 play += 1
             print("Set alarm again")
             return
