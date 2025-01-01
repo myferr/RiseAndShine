@@ -11,27 +11,20 @@ import simpleaudio as sa
 def alarm(set_alarm_timer):
     while True:
         time.sleep(1)  # Print current time after every 1 second
-        current_time = datetime.datetime.now()
-        now = current_time.strftime("%H:%M:%S")
-        date = current_time.strftime("%d/%m/%Y")
-        print("The Set Date is:", date)
-        print(now)
-        if now == set_alarm_timer:
+        current_time = datetime.datetime.now().strftime("%H:%M:%S")
+        print("Current Time:", current_time)
+        if current_time == set_alarm_timer:
             print("Time to Wake up")
-
-            play = 0
             wave_obj = sa.WaveObject.from_wave_file("sound.wav")
-            while play != 10:  # This will ring alarm for 10 seconds
+            for _ in range(5):  # This will ring alarm for 10 seconds
                 play_obj = wave_obj.play()
                 play_obj.wait_done()
-                play += 1
-                play += 1
             print("Set alarm again")
             return
 
 
 def actual_time():
-    set_alarm_timer = f"{hour.get()}:{min.get()}:{sec.get()}"
+    set_alarm_timer = f"{hour.get()}:{minute.get()}:{second.get()}"
     alarm(set_alarm_timer)
 
 
@@ -41,26 +34,23 @@ clock.title("TryCatch Alarm Clock")
 clock.geometry("500x250")
 
 # UI Elements
-get_up = Label(clock, text="At what time do you wanna get up?",
-               fg="Blue", font=("Arial", 20, 'bold')).place(x=35, y=10)
+Label(clock, text="At what time do you wanna get up?",
+      fg="Blue", font=("Arial", 20, 'bold')).place(x=35, y=10)
 
-time_format = Label(clock, text="Enter the time in 24 hr format",
-                    fg="Blue", bg="black", font=("Arial", 15, 'bold')).place(x=115, y=200)
-addTime = Label(clock, text="Hour  Min   Sec", font=60).place(x=150, y=90)
+Label(clock, text="Enter the time in 24 hr format",
+      fg="Blue", bg="black", font=("Arial", 15, 'bold')).place(x=115, y=200)
+Label(clock, text="Hour  Min   Sec", font=60).place(x=150, y=90)
 
 # Variables to set the alarm
 hour = StringVar()
-min = StringVar()
-sec = StringVar()
+minute = StringVar()
+second = StringVar()
 
-hourTime = Entry(clock, textvariable=hour, bg="powderblue",
-                 width=15).place(x=150, y=120)
-minTime = Entry(clock, textvariable=min, bg="powderblue",
-                width=15).place(x=190, y=120)
-secTime = Entry(clock, textvariable=sec, bg="powderblue",
-                width=15).place(x=240, y=120)
+Entry(clock, textvariable=hour, bg="powderblue", width=15).place(x=150, y=120)
+Entry(clock, textvariable=minute, bg="powderblue", width=15).place(x=190, y=120)
+Entry(clock, textvariable=second, bg="powderblue", width=15).place(x=240, y=120)
 
-set_alarm = Button(clock, text="Set Alarm", fg="green", activebackground="grey", activeforeground="darkgreen", width=10, font=(
+Button(clock, text="Set Alarm", fg="green", activebackground="grey", activeforeground="darkgreen", width=10, font=(
     "Arial", 15, 'bold'), command=actual_time).place(x=200, y=150)
 
 clock.mainloop()
