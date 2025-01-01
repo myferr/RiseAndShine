@@ -10,13 +10,13 @@ import simpleaudio as sa
 
 def alarm(set_alarm_timer):
     while True:
-        time.sleep(1)  # Print current time after every 1 second
+        time.sleep(1)
         current_time = datetime.datetime.now().strftime("%H:%M:%S")
         print("Current Time:", current_time)
         if current_time == set_alarm_timer:
             print("Time to Wake up")
             wave_obj = sa.WaveObject.from_wave_file("sound.wav")
-            for _ in range(5):  # This will ring alarm for 10 seconds
+            for _ in range(5):
                 play_obj = wave_obj.play()
                 play_obj.wait_done()
             print("Set alarm again")
@@ -36,7 +36,6 @@ clock.geometry("500x250")
 # UI Elements
 Label(clock, text="At what time do you wanna get up?",
       fg="Blue", font=("Arial", 20, 'bold')).place(x=35, y=10)
-
 Label(clock, text="Enter the time in 24 hr format",
       fg="Blue", bg="black", font=("Arial", 15, 'bold')).place(x=115, y=200)
 Label(clock, text="Hour  Min   Sec", font=60).place(x=150, y=90)
