@@ -1,0 +1,12 @@
+[project]
+name = "RiseAndShine"
+version = "0.1.0"
+description = "A simple alarm clock application"
+authors = ["Dennis"]
+license = "MIT"
+
+[dependencies]
+tkinter = "*"
+simpleaudio = "*"
+datetime = "*"
+time = "*"
